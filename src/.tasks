@@ -1,0 +1,21 @@
+[build]
+command=javac src/com/Main.java -d bin -sourcepath src
+cwd=$(VIM_CWD)
+output=terminal
+pos=buttom
+save=2
+
+[run]
+command=java -cp ../bin com/Main
+cwd=$(VIM_CWD)/src
+output=terminal
+pos=bottom
+save=2
+
+[jar]
+command=jar -cvef com/Main client.jar  . 
+
+cwd=$(VIM_CWD)/bin
+output=terminal
+pos=bottom
+save=2
