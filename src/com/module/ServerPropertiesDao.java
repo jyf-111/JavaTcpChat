@@ -23,14 +23,4 @@ public class ServerPropertiesDao {
 	public String getProperty(String s){
 		return properties.get(s).toString();
 	}
-
-	public static void main(String[] args) {
-		var path = System.getProperty("user.dir");
-		System.out.println(path);
-		try {
-			new ServerPropertiesDao();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
