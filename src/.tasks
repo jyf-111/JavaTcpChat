@@ -6,8 +6,8 @@ pos=buttom
 save=2
 
 [run]
-command=java -cp ../bin com/Main.java
-cwd=$(VIM_CWD)/src
+command=java -cp . com/Main
+cwd=$(VIM_CWD)/bin
 output=terminal
 pos=bottom
 save=2
