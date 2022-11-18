@@ -10,7 +10,7 @@ import com.viewer.Viewer;
 
 public class Controller {
 	private ClientDao clientDao;
-	private Viewer viewer;
+	private final Viewer viewer;
 	private ServerPropertiesDao serverPropertiesDao;
 
 	public Controller() {
@@ -18,14 +18,14 @@ public class Controller {
 		viewer.init();
 		try {
 			serverPropertiesDao = new ServerPropertiesDao();
-			//connect server
+			// connect server
 			clientDao = new ClientDao(serverPropertiesDao.getProperty("address"),
 					Integer.parseInt(serverPropertiesDao.getProperty("port")));
 			// register
 			clientDao.registerUser(InetAddress.getLocalHost().getHostName(),
 					serverPropertiesDao.getProperty("address"));
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -35,15 +35,15 @@ public class Controller {
 			// label
 			try {
 				viewer.getLabel().setText(InetAddress.getLocalHost().getHostName());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 			// send button
 			viewer.getsendButton().addActionListener(e -> {
 				try {
-					String input = viewer.getInputTextArea().getText();
+					final String input = viewer.getInputTextArea().getText();
 					clientDao.sendMsg(input);
-				} catch (IOException e1) {
+				} catch (final IOException e1) {
 					e1.printStackTrace();
 				}
 			});
@@ -56,12 +56,12 @@ public class Controller {
 			// bind enter to send
 			viewer.getInputTextArea().addKeyListener(new KeyAdapter() {
 				@Override
-				public void keyPressed(KeyEvent e) {
+				public void keyPressed(final KeyEvent e) {
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						try {
-							String input = viewer.getInputTextArea().getText();
+							final String input = viewer.getInputTextArea().getText();
 							clientDao.sendMsg(input);
-						} catch (IOException e1) {
+						} catch (final IOException e1) {
 							e1.printStackTrace();
 						}
 					}
@@ -71,7 +71,7 @@ public class Controller {
 			new Thread(() -> {
 				while (true) {
 					try {
-						int flag = clientDao.getFlag();
+						final int flag = clientDao.getFlag();
 						if (flag == MsgEnum.message.ordinal()) {
 							viewer.getOutputTextArea().append(clientDao.recvMsg() + "\n");
 							viewer.getInputTextArea().setText("");

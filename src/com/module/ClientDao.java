@@ -9,12 +9,12 @@ import java.net.Socket;
 import java.util.Vector;
 
 public class ClientDao {
-	private Socket client;
-	private DataOutputStream out;
-	private DataInputStream in;
-	private ObjectInputStream ois;
+	private final Socket client;
+	private final DataOutputStream out;
+	private final DataInputStream in;
+	private final ObjectInputStream ois;
 
-	public ClientDao(String address, int port) throws IOException {
+	public ClientDao(final String address, final int port) throws IOException {
 		System.out.println("connect server ...");
 		client = new Socket(address, port);
 		out = new DataOutputStream(client.getOutputStream());
@@ -28,7 +28,7 @@ public class ClientDao {
 		out.writeUTF(s);
 	}
 
-	public void registerUser(String hostname, String ip) throws IOException {
+	public void registerUser(final String hostname, final String ip) throws IOException {
 		out.writeUTF(hostname);
 		out.writeUTF(ip);
 	}
@@ -38,7 +38,7 @@ public class ClientDao {
 	}
 
 	public String recvMsg() throws IOException {
-		String recv = in.readUTF();
+		final String recv = in.readUTF();
 		System.out.println("client receive : " + recv + '\n');
 		return recv;
 	}

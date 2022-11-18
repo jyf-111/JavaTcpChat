@@ -12,15 +12,15 @@ public class ServerPropertiesDao {
 
 	public ServerPropertiesDao() throws IOException {
 		properties = new Properties();
-		// inside jar 
+		// inside jar
 		// inputStream = ClassLoader.getSystemResourceAsStream("server.properties");
 		// ouutside jar
-		String filePath = System.getProperty("user.dir") + "/server.properties";
+		final String filePath = System.getProperty("user.dir") + "/server.properties";
 		inputStream = new BufferedInputStream(new FileInputStream(filePath));
 		properties.load(inputStream);
 	}
 
-	public String getProperty(String s){
+	public String getProperty(final String s) {
 		return properties.get(s).toString();
 	}
 }

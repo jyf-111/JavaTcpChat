@@ -57,10 +57,10 @@ public class Viewer extends JFrame {
 		sendButton = new JButton("send");
 		clearButton = new JButton("clear");
 
-		var userListBox = Box.createHorizontalBox();
-		var labelBox = Box.createHorizontalBox();
-		var hBox = Box.createVerticalBox();
-		var vBox = Box.createHorizontalBox();
+		final var userListBox = Box.createHorizontalBox();
+		final var labelBox = Box.createHorizontalBox();
+		final var hBox = Box.createVerticalBox();
+		final var vBox = Box.createHorizontalBox();
 
 		userListBox.add(userScrollPane);
 		userListBox.add(hBox);
@@ -87,7 +87,7 @@ public class Viewer extends JFrame {
 		return userScrollPane;
 	}
 
-	public void setUserScrollPane(JScrollPane userScrollPane) {
+	public void setUserScrollPane(final JScrollPane userScrollPane) {
 		this.userScrollPane = userScrollPane;
 	}
 
@@ -95,7 +95,7 @@ public class Viewer extends JFrame {
 		return userList;
 	}
 
-	public void setUserList(JList<String> userList) {
+	public void setUserList(final JList<String> userList) {
 		this.userList = userList;
 	}
 
@@ -103,7 +103,7 @@ public class Viewer extends JFrame {
 		return inputTextArea;
 	}
 
-	public void setInputTextArea(JTextArea inputTextArea) {
+	public void setInputTextArea(final JTextArea inputTextArea) {
 		this.inputTextArea = inputTextArea;
 	}
 
@@ -111,7 +111,7 @@ public class Viewer extends JFrame {
 		return outputTextArea;
 	}
 
-	public void setOutputTextArea(JTextArea outputTextArea) {
+	public void setOutputTextArea(final JTextArea outputTextArea) {
 		this.outputTextArea = outputTextArea;
 	}
 
@@ -119,11 +119,11 @@ public class Viewer extends JFrame {
 		return usernameLabel;
 	}
 
-	public void setLabel(JLabel label) {
+	public void setLabel(final JLabel label) {
 		this.usernameLabel = label;
 	}
 
-	public void setsendButton(JButton button) {
+	public void setsendButton(final JButton button) {
 		this.sendButton = button;
 	}
 
@@ -131,7 +131,7 @@ public class Viewer extends JFrame {
 		return inputPane;
 	}
 
-	public void setInputPane(JScrollPane inputPane) {
+	public void setInputPane(final JScrollPane inputPane) {
 		this.inputPane = inputPane;
 	}
 
@@ -139,7 +139,7 @@ public class Viewer extends JFrame {
 		return outputPane;
 	}
 
-	public void setOutputPane(JScrollPane outputPane) {
+	public void setOutputPane(final JScrollPane outputPane) {
 		this.outputPane = outputPane;
 	}
 
@@ -147,7 +147,7 @@ public class Viewer extends JFrame {
 		return sendButton;
 	}
 
-	public void setSendButton(JButton sendButton) {
+	public void setSendButton(final JButton sendButton) {
 		this.sendButton = sendButton;
 	}
 
@@ -159,7 +159,7 @@ public class Viewer extends JFrame {
 		return usernameLabel;
 	}
 
-	public void setUsernameLabel(JLabel usernameLabel) {
+	public void setUsernameLabel(final JLabel usernameLabel) {
 		this.usernameLabel = usernameLabel;
 	}
 
@@ -167,11 +167,11 @@ public class Viewer extends JFrame {
 		return currentUserCount;
 	}
 
-	public void setCurrentUserCount(JLabel currentUserCount) {
+	public void setCurrentUserCount(final JLabel currentUserCount) {
 		this.currentUserCount = currentUserCount;
 	}
 
-	public void setClearButton(JButton clearButton) {
+	public void setClearButton(final JButton clearButton) {
 		this.clearButton = clearButton;
 	}
 
