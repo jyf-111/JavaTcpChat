@@ -1,15 +1,22 @@
 package com.viewer;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class Viewer extends JFrame {
+	JScrollPane userScrollPane;
+	JList<String> userList;
+
+	JLabel usernameLabel;
+	JLabel currentUserCount;
+
 	JTextArea inputTextArea;
 	JTextArea outputTextArea;
 	JScrollPane inputPane;
@@ -21,38 +28,75 @@ public class Viewer extends JFrame {
 		super("chat room");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.GRAY);
-		setSize(800, 500);
+		setSize(900, 600);
 		setLocation(200, 200);
-		init();
 		setVisible(true);
 	}
 
-	private void init() {
+	public void  init() {
+		userList = new JList<>();
+		userScrollPane = new JScrollPane(userList);
+		userScrollPane.setMaximumSize(new Dimension(100, 100000));
+		userList.setFont(new Font("Arial", Font.PLAIN, 15));
+
+		usernameLabel = new JLabel();
+		currentUserCount = new JLabel("disconnect");
+
+		usernameLabel.setFont(new Font("雅黑", Font.BOLD, 20));
+		currentUserCount.setFont(new Font("雅黑", Font.BOLD, 20));
+
 		inputTextArea = new JTextArea(5, 10);
 		outputTextArea = new JTextArea(10, 10);
 		outputTextArea.setEditable(false);
 		inputPane = new JScrollPane(inputTextArea);
 		outputPane = new JScrollPane(outputTextArea);
 
-		inputTextArea.setFont(new Font("雅黑",Font.PLAIN,20));
-		outputTextArea.setFont(new Font("雅黑",Font.PLAIN,20));
-		
+		inputTextArea.setFont(new Font("雅黑", Font.PLAIN, 20));
+		outputTextArea.setFont(new Font("雅黑", Font.PLAIN, 20));
 
 		sendButton = new JButton("send");
 		clearButton = new JButton("clear");
 
-		var hbox = Box.createVerticalBox();
-		var vbox = Box.createHorizontalBox();
-		hbox.add(outputPane);
-		hbox.add(Box.createVerticalStrut(1));
-		hbox.add(vbox);
-		vbox.add(clearButton);
-		vbox.add(Box.createHorizontalGlue());
-		vbox.add(sendButton);
-		hbox.add(Box.createVerticalStrut(1));
-		hbox.add(inputPane);
+		var userListBox = Box.createHorizontalBox();
+		var labelBox = Box.createHorizontalBox();
+		var hBox = Box.createVerticalBox();
+		var vBox = Box.createHorizontalBox();
 
-		getContentPane().add(hbox);
+		userListBox.add(userScrollPane);
+		userListBox.add(hBox);
+
+		labelBox.add(currentUserCount);
+		labelBox.add(Box.createHorizontalGlue());
+		labelBox.add(usernameLabel);
+
+		hBox.add(labelBox);
+		hBox.add(Box.createHorizontalGlue());
+		hBox.add(outputPane);
+		hBox.add(Box.createVerticalStrut(1));
+		hBox.add(vBox);
+		vBox.add(clearButton);
+		vBox.add(Box.createHorizontalGlue());
+		vBox.add(sendButton);
+		hBox.add(Box.createVerticalStrut(1));
+		hBox.add(inputPane);
+
+		getContentPane().add(userListBox);
+	}
+
+	public JScrollPane getUserScrollPane() {
+		return userScrollPane;
+	}
+
+	public void setUserScrollPane(JScrollPane userScrollPane) {
+		this.userScrollPane = userScrollPane;
+	}
+
+	public JList<String> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(JList<String> userList) {
+		this.userList = userList;
 	}
 
 	public JTextArea getInputTextArea() {
@@ -69,6 +113,14 @@ public class Viewer extends JFrame {
 
 	public void setOutputTextArea(JTextArea outputTextArea) {
 		this.outputTextArea = outputTextArea;
+	}
+
+	public JLabel getLabel() {
+		return usernameLabel;
+	}
+
+	public void setLabel(JLabel label) {
+		this.usernameLabel = label;
 	}
 
 	public void setsendButton(JButton button) {
@@ -101,6 +153,22 @@ public class Viewer extends JFrame {
 
 	public JButton getClearButton() {
 		return clearButton;
+	}
+
+	public JLabel getUsernameLabel() {
+		return usernameLabel;
+	}
+
+	public void setUsernameLabel(JLabel usernameLabel) {
+		this.usernameLabel = usernameLabel;
+	}
+
+	public JLabel getCurrentUserCount() {
+		return currentUserCount;
+	}
+
+	public void setCurrentUserCount(JLabel currentUserCount) {
+		this.currentUserCount = currentUserCount;
 	}
 
 	public void setClearButton(JButton clearButton) {

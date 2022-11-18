@@ -1,5 +1,7 @@
 package com.module;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +12,11 @@ public class ServerPropertiesDao {
 
 	public ServerPropertiesDao() throws IOException {
 		properties = new Properties();
-		inputStream = ClassLoader.getSystemResourceAsStream("server.properties");
+		//jar 内
+		// inputStream = ClassLoader.getSystemResourceAsStream("server.properties");
+		// jar 外
+		String filePath = System.getProperty("user.dir") + "/server.properties";
+		inputStream = new BufferedInputStream(new FileInputStream(filePath));
 		properties.load(inputStream);
 	}
 

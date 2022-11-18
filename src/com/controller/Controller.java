@@ -1,11 +1,12 @@
 package com.controller;
 
+import java.awt.event.*;
 import java.io.IOException;
+import java.net.InetAddress;
 
 import com.module.ClientDao;
 import com.module.ServerPropertiesDao;
 import com.viewer.Viewer;
-import java.awt.event.*;
 
 public class Controller {
 	private ClientDao clientDao;
@@ -13,15 +14,30 @@ public class Controller {
 	private ServerPropertiesDao serverPropertiesDao;
 
 	public Controller() {
+		viewer = new Viewer();
+		viewer.init();
 		try {
 			serverPropertiesDao = new ServerPropertiesDao();
+			//connect server
 			clientDao = new ClientDao(serverPropertiesDao.getProperty("address"),
-				Integer.parseInt(serverPropertiesDao.getProperty("port")));
-		} catch (IOException e2) {
-			e2.printStackTrace();
+					Integer.parseInt(serverPropertiesDao.getProperty("port")));
+			// register
+			clientDao.registerUser(InetAddress.getLocalHost().getHostName(),
+					serverPropertiesDao.getProperty("address"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
+
+	public void initGui() {
 		javax.swing.SwingUtilities.invokeLater(() -> {
-			viewer = new Viewer();
+			// label
+			try {
+				viewer.getLabel().setText(InetAddress.getLocalHost().getHostName());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			// send button
 			viewer.getsendButton().addActionListener(e -> {
 				try {
@@ -51,21 +67,23 @@ public class Controller {
 					}
 				}
 			});
+			// recvive Msg thread
 			new Thread(() -> {
 				while (true) {
-					String recv;
 					try {
-						// receive and show
-						recv = clientDao.recvMsg();
-						viewer.getOutputTextArea().append(recv + '\n');
-						// clear InputTextArea
-						viewer.getInputTextArea().setText("");
-						// fix pos last line
-						var sBar = viewer.getOutputPane().getVerticalScrollBar();
-						var currentPos = viewer.getOutputTextArea().getText().split("\n").length
-								* viewer.getOutputTextArea().getFont().getSize();
-						sBar.setValue(currentPos);
-					} catch (IOException e1) {
+						int flag = clientDao.getFlag();
+						if (flag == MsgEnum.message.ordinal()) {
+							viewer.getOutputTextArea().append(clientDao.recvMsg() + "\n");
+							viewer.getInputTextArea().setText("");
+							viewer.getOutputTextArea()
+									.setCaretPosition(viewer.getOutputTextArea().getDocument().getLength());
+						} else if (flag == MsgEnum.userlist.ordinal()) {
+							viewer.getUserList().setListData(clientDao.recvUserList());
+							viewer.getCurrentUserCount().setText(
+									"Current User Count: "
+											+ Integer.toString(viewer.getUserList().getModel().getSize()));
+						}
+					} catch (IOException | ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
 				}
