@@ -1,13 +1,13 @@
-package server.controller;
+package com.controller;
 
 import java.io.IOException;
 
-import server.serverDao.TcpServerDao;
+import com.serverDao.TcpServerDao;
 
 public class TcpController {
 	public TcpController() {
 		try {
-			new TcpServerDao(7788);
+			new TcpServerDao(7788).process();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

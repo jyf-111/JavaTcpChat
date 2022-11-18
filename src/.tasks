@@ -1,5 +1,5 @@
 [build]
-command=javac  src/server/Main.java -d bin -sourcepath src
+command=javac  src/com/Main.java -d bin -sourcepath src
 cwd=$(VIM_CWD)
 output=terminal
 pos=buttom
@@ -13,7 +13,7 @@ pos=bottom
 save=2
 
 [jar]
-command=jar -cvef server/Main server.jar  .
+command=jar -cvef com/Main server.jar .
 
 cwd=$(VIM_CWD)/bin
 output=terminal

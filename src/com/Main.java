@@ -1,6 +1,6 @@
-package server;
+package com;
 
-import server.controller.TcpController;
+import com.controller.TcpController;
 
 public class Main {
     public static void main(String[] args) {
