@@ -12,9 +12,9 @@ public class ServerPropertiesDao {
 
 	public ServerPropertiesDao() throws IOException {
 		properties = new Properties();
-		//jar 内
+		// inside jar 
 		// inputStream = ClassLoader.getSystemResourceAsStream("server.properties");
-		// jar 外
+		// ouutside jar
 		String filePath = System.getProperty("user.dir") + "/server.properties";
 		inputStream = new BufferedInputStream(new FileInputStream(filePath));
 		properties.load(inputStream);
