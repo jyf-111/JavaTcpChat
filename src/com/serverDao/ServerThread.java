@@ -8,11 +8,11 @@ import java.net.Socket;
 import java.util.Vector;
 
 public class ServerThread implements Runnable, TcpBroadcastImpl {
-	private Socket socket;
+	private final Socket socket;
 	private User user;
-	private Vector<User> userVector;
+	private final Vector<User> userVector;
 
-	public ServerThread(Socket socket, Vector<User> userVector) {
+	public ServerThread(final Socket socket, final Vector<User> userVector) {
 		this.socket = socket;
 		this.userVector = userVector;
 	}
@@ -24,11 +24,11 @@ public class ServerThread implements Runnable, TcpBroadcastImpl {
 			registerUser();
 			while (true) {
 				// recv
-				String recv = recvMsg();
+				final String recv = recvMsg();
 				// broadcast
 				broadcast(recv);
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// client disconnect
 			try {
 				user.getIn().close();
@@ -39,7 +39,7 @@ public class ServerThread implements Runnable, TcpBroadcastImpl {
 				System.out.println("client disconnect");
 				userVector.remove(user);
 				broadcast();
-			} catch (IOException e1) {
+			} catch (final IOException e1) {
 				e1.printStackTrace();
 			}
 			// remove user
@@ -47,8 +47,8 @@ public class ServerThread implements Runnable, TcpBroadcastImpl {
 	}
 
 	@Override
-	public void broadcast(String s) throws IOException {
-		for (var user : userVector) {
+	public void broadcast(final String s) throws IOException {
+		for (final var user : userVector) {
 			user.getDos().writeInt(MsgEnum.message.ordinal());
 			user.getDos().writeUTF(s);
 		}
@@ -56,11 +56,11 @@ public class ServerThread implements Runnable, TcpBroadcastImpl {
 
 	@Override
 	public void broadcast() throws IOException {
-		Vector<String> userInfoVector = new Vector<>();
-		for (var user2 : userVector) {
+		final Vector<String> userInfoVector = new Vector<>();
+		for (final var user2 : userVector) {
 			userInfoVector.add(user2.getHostname() + "(" + user2.getIp() + ")");
 		}
-		for (var user : userVector) {
+		for (final var user : userVector) {
 			user.getDos().writeInt(MsgEnum.userlist.ordinal());
 			user.getOos().writeObject(userInfoVector);
 		}
@@ -78,8 +78,8 @@ public class ServerThread implements Runnable, TcpBroadcastImpl {
 		user.setIn(new DataInputStream(socket.getInputStream()));
 		user.setDos(new DataOutputStream(socket.getOutputStream()));
 		user.setOos(new ObjectOutputStream(socket.getOutputStream()));
-		var hostname = user.getIn().readUTF();
-		var ip = user.getIn().readUTF();
+		final var hostname = user.getIn().readUTF();
+		final var ip = user.getIn().readUTF();
 		user.setHostname(hostname);
 		user.setIp(ip);
 		userVector.add(user);

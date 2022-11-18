@@ -16,7 +16,7 @@ public class User implements Serializable {
 		return in;
 	}
 
-	public void setIn(DataInputStream in) {
+	public void setIn(final DataInputStream in) {
 		this.in = in;
 	}
 
@@ -24,7 +24,7 @@ public class User implements Serializable {
 		return dos;
 	}
 
-	public void setDos(DataOutputStream dos) {
+	public void setDos(final DataOutputStream dos) {
 		this.dos = dos;
 	}
 
@@ -32,7 +32,7 @@ public class User implements Serializable {
 		return oos;
 	}
 
-	public void setOos(ObjectOutputStream oos) {
+	public void setOos(final ObjectOutputStream oos) {
 		this.oos = oos;
 	}
 
@@ -40,7 +40,7 @@ public class User implements Serializable {
 		return ip;
 	}
 
-	public void setIp(String ip) {
+	public void setIp(final String ip) {
 		this.ip = ip;
 	}
 
@@ -48,7 +48,7 @@ public class User implements Serializable {
 		return hostname;
 	}
 
-	public void setHostname(String hostname) {
+	public void setHostname(final String hostname) {
 		this.hostname = hostname;
 	}
 
