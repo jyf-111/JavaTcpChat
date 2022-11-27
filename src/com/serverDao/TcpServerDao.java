@@ -5,12 +5,14 @@ import java.net.*;
 import java.util.Vector;
 
 public class TcpServerDao {
+	serverPropertiesDao properties;
 	private final int port;
 	private final ServerSocket serverSocket;
 	Vector<User> userVector;
 
-	public TcpServerDao(final int serverPort) throws IOException {
-		port = serverPort;
+	public TcpServerDao() throws IOException {
+		properties = new serverPropertiesDao();
+		port = Integer.parseInt(properties.getProperty("port"));
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(0);
 

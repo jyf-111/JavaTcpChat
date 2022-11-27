@@ -11,17 +11,17 @@ client <- server : broadcast
 package serverDao{
 	enum MsgEnum
 	class ServerThread
-	class TcpBroadcastImpl
+	interface TcpBroadcast
 	class TcpServerDao
 	class User
 }
 MsgEnum -down-* ServerThread
 User -down-* ServerThread
-TcpBroadcastImpl -|> ServerThread
+TcpBroadcast-|> ServerThread
 ServerThread -o TcpServerDao
 
 package controler{
-	interface TcpBroadcastImpl
+	interface TcpBroadcast
 	class TcpController
 }
 

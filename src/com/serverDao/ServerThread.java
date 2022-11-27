@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Vector;
 
-public class ServerThread implements Runnable, TcpBroadcastImpl {
+public class ServerThread implements Runnable, TcpBroadcast {
 	private final Socket socket;
 	private User user;
 	private final Vector<User> userVector;

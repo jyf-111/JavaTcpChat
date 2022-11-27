@@ -1,13 +1,13 @@
 [build]
-command=javac  src/com/Main.java -d bin -sourcepath src
-cwd=$(VIM_CWD)
+command=javac com/Main.java -d ../bin 
+cwd=$(VIM_ROOT)/src
 output=terminal
 pos=buttom
 save=2
 
 [run]
-command=java -cp . com/Main
-cwd=$(VIM_CWD)/bin
+command=java com/Main
+cwd=$(VIM_ROOT)/bin
 output=terminal
 pos=bottom
 save=2
