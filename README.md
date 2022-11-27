@@ -6,7 +6,7 @@
 ## build from resource
 put server.properties where run `java /path/to/Main`
 ## run exe on windows
-put server.properties where exe file place
+put 'server.properties' where exe file place
 
 ```properties
 address=`{your ip}`
@@ -16,7 +16,6 @@ port=7788
 
 - 用户列表会随用户加入和退出改变
 - 支持回车发送
-- 服务端端口定死7788,别问问就是懒得改了
 
 <img width="666" alt="javatcpchat" src="https://user-images.githubusercontent.com/77335030/202615307-b13c7dbc-f4f2-4c68-b5e9-1c8fce48f4a2.png">
 
