@@ -9,8 +9,8 @@ put server.properties where run `java /path/to/Main`
 put 'server.properties' where exe file place
 
 ```properties
-address=`{your ip}`
-port=7788
+address=`{server ip}`
+port={server port}
 ```
 --- 
 
