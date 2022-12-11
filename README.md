@@ -10,7 +10,7 @@ put 'server.properties' where exe file place
 
 ```properties
 address=`{server ip}`
-port={server port}
+port=`{server port}`
 ```
 --- 
 
